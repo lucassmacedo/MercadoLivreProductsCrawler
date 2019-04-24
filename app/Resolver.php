@@ -55,11 +55,11 @@ class Resolver
 
         Parser::getAllProducts($html, $array);
 
-        while ($nextPage = Parser::hasNextPage($html)) {
-            $this->console->info(".:: Buscando produtos {$nextPage}  ::.");
-            $html = $this->getAllPage($nextPage);
-            Parser::getAllProducts($html, $array);
-        }
+//        while ($nextPage = Parser::hasNextPage($html)) {
+//            $this->console->info(".:: Buscando produtos {$nextPage}  ::.");
+//            $html = $this->getAllPage($nextPage);
+//            Parser::getAllProducts($html, $array);
+//        }
 
         return $array;
     }
@@ -72,6 +72,7 @@ class Resolver
         $html = $this->getAllPage($url);
 
         Parser::getInfosProduct($html, $array);
+        dd($array);
         $this->console->info("\n .:: Informações obtidas do produto: ** {$array['title']} **  ::.");
         return $array;
     }

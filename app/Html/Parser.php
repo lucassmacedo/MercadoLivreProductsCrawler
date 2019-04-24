@@ -21,8 +21,11 @@ class Parser
      */
     public static function getInfosProduct($html, &$array)
     {
+        $parser = new Crawler($html);
+
         if (preg_match('/({"item_id")([\s\S]*?)(?=\))/', $html, $matches)) {
             $melidata = json_decode($matches[0]);
+
             $array = [
                 'id'            => $melidata->recommendations->track_info->trigger->item_info->id,
                 'price'         => $melidata->recommendations->track_info->trigger->item_info->price,
@@ -30,6 +33,12 @@ class Parser
                 'free_shipping' => $melidata->recommendations->track_info->trigger->item_info->free_shipping,
                 'attributes'    => $melidata->recommendations->track_info->trigger->item_info->attributes,
             ];
+
+            if (isset($melidata->recommendations->track_info->trigger->item_info->attributes)) {
+                $array['attributes'] = $melidata->recommendations->track_info->trigger->item_info->attributes;
+            }
+            $array['description'] = trim($parser->filter('.item-description__text')->text());
+            $array['image'] = trim($parser->filter('.gallery-trigger')->attr('href'));
         }
     }
 

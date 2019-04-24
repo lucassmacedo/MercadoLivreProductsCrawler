@@ -55,9 +55,9 @@ class Downloader
     {
         $array = [];
 
-        $localLessons = $this->resolver->getAllProducts($this->url);
-        foreach ($localLessons as $localLesson) {
-            $array[] = $this->resolver->getProductInfo($localLesson);
+        $products = $this->resolver->getAllProducts($this->url);
+        foreach ($products as $product) {
+            $array[] = $this->resolver->getProductInfo($product);
         }
 
 
