@@ -72,7 +72,7 @@ class Resolver
         $html = $this->getAllPage($url);
 
         Parser::getInfosProduct($html, $array);
-        dd($array);
+
         $this->console->info("\n .:: Informações obtidas do produto: ** {$array['title']} **  ::.");
         return $array;
     }
