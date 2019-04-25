@@ -30,15 +30,19 @@ class Parser
                     throw new \Exception();
                 }
                 $array = [
-                    'id'            => $melidata->recommendations->track_info->trigger->item_info->id,
                     'price'         => $melidata->recommendations->track_info->trigger->item_info->price,
                     'title'         => $melidata->recommendations->track_info->trigger->item_info->title,
-                    'free_shipping' => $melidata->recommendations->track_info->trigger->item_info->free_shipping
+                    'free_shipping' => $melidata->recommendations->track_info->trigger->item_info->free_shipping,
                 ];
 
                 if (isset($melidata->recommendations) && isset($melidata->recommendations->track_info->trigger->item_info->attributes)) {
-                    $array['attributes'] = $melidata->recommendations->track_info->trigger->item_info->attributes;
+                    foreach ($melidata->recommendations->track_info->trigger->item_info->attributes as $item) {
+                        if ($item->id == 'PART_NUMBER') {
+                            $array['id'] = $item->value_id;
+                        }
+                    }
                 }
+                dd($array);
                 $array['description'] = trim($parser->filter('.item-description__text')->text());
                 $array['image'] = trim($parser->filter('.gallery-trigger')->attr('href'));
             } catch (\Exception $exception) {
