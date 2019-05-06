@@ -73,6 +73,7 @@ class Resolver
 
         Parser::getInfosProduct($html, $array);
 
+
         $this->console->info("\n .:: Informações obtidas do produto: ** {$array['title']} **  ::.");
         return $array;
     }

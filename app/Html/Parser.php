@@ -38,11 +38,10 @@ class Parser
                 if (isset($melidata->recommendations) && isset($melidata->recommendations->track_info->trigger->item_info->attributes)) {
                     foreach ($melidata->recommendations->track_info->trigger->item_info->attributes as $item) {
                         if ($item->id == 'PART_NUMBER') {
-                            $array['id'] = $item->value_id;
+                            $array['id'] = $item->value_name;
                         }
                     }
                 }
-                dd($array);
                 $array['description'] = trim($parser->filter('.item-description__text')->text());
                 $array['image'] = trim($parser->filter('.gallery-trigger')->attr('href'));
             } catch (\Exception $exception) {

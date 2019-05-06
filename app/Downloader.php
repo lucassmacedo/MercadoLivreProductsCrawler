@@ -66,13 +66,6 @@ class Downloader
          *
          */
 
-
-////        $fp = fopen('data.csv', 'w');
-//        foreach($array as $line){
-//            $val = explode(",",$line);
-//            Storage::disk('local')->put('data.csv', $val);
-//        }
-
         $fp = fopen(storage_path('data.csv'), 'w');
 
         foreach ($array as $linha) {
